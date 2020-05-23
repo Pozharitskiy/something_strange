@@ -15,6 +15,7 @@ const authReducers = (state = initialState, action) => {
       const userData = { ...action.data, token: token };
 
       http(userData);
+      //закинуть еще и в редакс
       localStorage.setItem('token', token);
       return { ...userData }
     default: return {}

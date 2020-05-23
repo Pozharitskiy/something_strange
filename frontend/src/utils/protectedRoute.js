@@ -4,13 +4,14 @@ import { Route } from "react-router-dom";
 import App from '../App';
 import Auth from '../components/auth';
 
-const protectedRoute = (user) => {
+const protectedRoute = () => {
   return function ({ component: Component, ...rest }) {
     return (
       <Route
         {...rest}
         render={props =>
-          !!user ? <App /> : <Auth />
+          //проверять редаксом
+          !!localStorage.getItem("token") ? <App /> : <Auth />
         }
       />
     );

@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-const AdminRoute = protectedRoute(localStorage.getItem("token"));
+const AdminRoute = protectedRoute();
 
 ReactDOM.render(
   <Provider store={store}>
