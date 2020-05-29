@@ -1,11 +1,12 @@
-import { SEND_AUTH_DATA } from "../actions/actions";
+import { SEND_AUTH_DATA, SET_TOKEN } from "../actions/actions";
 import createToken from "../utils/createToken";
 import http from "../services/http";
 
 const initialState = {
   userName: '',
   userEmail: '',
-  userPass: ''
+  userPass: '',
+  token: null
 };
 
 const authReducers = (state = initialState, action) => {
@@ -15,9 +16,11 @@ const authReducers = (state = initialState, action) => {
       const userData = { ...action.data, token: token };
 
       http(userData);
-      //закинуть еще и в редакс
+      
       localStorage.setItem('token', token);
-      return { ...userData }
+      return { ...state, ...userData }
+    case SET_TOKEN:
+      return { ...state, token: action.token }
     default: return {}
   }
 }
