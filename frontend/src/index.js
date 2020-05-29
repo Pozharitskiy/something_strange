@@ -8,14 +8,13 @@ import {
 import thunk from 'redux-thunk';
 
 import App from './App';
-import protectedRoute from "./utils/protectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import rootReducer from './reducers/rootReducer';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-const AdminRoute = protectedRoute();
 
 ReactDOM.render(
   <Provider store={store}>

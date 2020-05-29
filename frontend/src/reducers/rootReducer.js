@@ -8,7 +8,7 @@ const initialState = {
     currentUser: {
       userName: '',
       userEmail: '',
-      userPass: ''
+      userPass: '',
     }
   }
 }
