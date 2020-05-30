@@ -1,4 +1,4 @@
-import { SEND_AUTH_DATA, SET_TOKEN } from "../actions/actions";
+import { SEND_AUTH_DATA, SET_TOKEN, LOGIN_USER } from "../actions/actions";
 import createToken from "../utils/createToken";
 import http from "../services/http";
 
@@ -11,16 +11,26 @@ const initialState = {
 
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
+
     case SEND_AUTH_DATA:
       const token = createToken();
       const userData = { ...action.data, token: token };
 
-      http(userData);
-      
+      http.post(userData);
+
       localStorage.setItem('token', token);
+
       return { ...state, ...userData }
+
     case SET_TOKEN:
       return { ...state, token: action.token }
+
+    case LOGIN_USER:
+      const loginData = { ...action.data };
+      http.login(loginData);
+
+      return { ...state, ...loginData }
+
     default: return {}
   }
 }

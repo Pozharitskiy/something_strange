@@ -12,12 +12,17 @@ app.use(express.json());
 //create user
 app.post("/users", async (req, res) => {
   try {
-    const username = req.body.userName;
+    const userName = req.body.userName;
     const email = req.body.userEmail;
     const pass = req.body.userPass;
     const token = req.body.token;
-    const newUser = await pool.query("INSERT INTO users (username, email, pass, token) VALUES($1, $2, $3, $4) RETURNING *", [username, email, pass, token]);
-    res.json(newUser.rows[0]);
+    const createdUser = await pool.query("SELECT * FROM users WHERE userName = $1", [userName]);
+    if (createdUser.rows.length === 0) {
+      newUser = await pool.query("INSERT INTO users (username, email, pass, token) VALUES($1, $2, $3, $4) RETURNING *", [userName, email, pass, token]);
+      res.json(newUser.rows[0]);
+    } else {
+      console.log('this username is already reserved');
+    }
   } catch (err) {
     console.log(err.message)
   }
@@ -35,13 +40,18 @@ app.get("/users", async (req, res) => {
 })
 
 
-//get a user 
+//get a user's token
 
-app.get("/users/:id", async (req, res) => {
+app.get("/users/:userName/:userPass", async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await pool.query("SELECT * FROM users WHERE userid = $1", [id]);
-    res.json(user.rows);
+    const { userName } = req.params;
+    const { userPass } = req.params;
+    const token = await pool.query("SELECT token FROM users WHERE userName = $1 AND pass = $2", [userName, userPass]);
+    if (token.rows[0].token) {
+      res.json(token.rows[0].token);
+    } else {
+      console.log('this user is not exist')
+    }
   } catch (error) {
     console.log(error)
   }
