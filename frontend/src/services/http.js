@@ -1,33 +1,38 @@
 const http = {
   //get, post, delete, put
 
-  //post
-  post: async (userData) => {
+  //register
+  register: async (userData, setToken) => {
+    console.log(userData);
     try {
       const response = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
-      });
+        body: JSON.stringify(userData),
+      })
+        .then((res) => res.json())
+        .then((data) => setToken(data.token));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 
   //login
-  login: async (userData) => {
+  login: async (userData, setToken) => {
     try {
-      const response = await fetch(`http://localhost:5000/users/${userData.userLoginName}/${userData.userLoginPass}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then(res => res.json())
-        .then(token => localStorage.setItem("token", token));
+      const response = await fetch(
+        `http://localhost:5000/users/${userData.userLoginName}/${userData.userLoginPass}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+        .then((res) => res.json())
+        .then((token) => setToken(token));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-
+  },
 };
 
 export default http;
