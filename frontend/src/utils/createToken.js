@@ -9,4 +9,4 @@ const createToken = () => {
 
   return token();
 };
-export default createToken;
+module.exports = createToken;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import { Route } from "react-router-dom";
 
-import {setToken} from '../actions/actions';
+import { setToken } from '../actions/actions';
 
 import App from '../App';
 import Auth from './auth';
@@ -12,11 +12,10 @@ const AdminRoute = ({ component: Component, token, setToken, state, ...rest }) =
     if (localStorage.getItem('token')) {
       setToken(localStorage.getItem('token'))
     }
+
   }, [])
   useEffect(() => {
-   console.log('state:', state)
   }, [state])
-  console.log('token:', token)
   return (
     <Route
       {...rest}
@@ -27,10 +26,11 @@ const AdminRoute = ({ component: Component, token, setToken, state, ...rest }) =
   );
 }
 
-const mapStateToProps = state => ({
-  token: state.authReducers.token,
-  state: state
-})
+const mapStateToProps = state => (
+  {
+    token: state.authReducers.token,
+    state: state
+  })
 
 const mapDispatchToProps = (dispatch) => ({
   setToken: token => dispatch(setToken(token))

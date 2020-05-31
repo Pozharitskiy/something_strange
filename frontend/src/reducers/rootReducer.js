@@ -1,23 +1,28 @@
-import { routerReducer } from 'react-router-redux';
-import { combineReducers } from 'redux';
+import { routerReducer } from "react-router-redux";
+import { combineReducers } from "redux";
 
 import authReducers from "./authReducers";
 
 const initialState = {
   data: {
     currentUser: {
-      userName: '',
-      userEmail: '',
-      userPass: '',
-    }
-  }
-}
+      userName: "",
+      userEmail: "",
+      userPass: "",
+    },
+  },
+};
 const rootReducer = (state = initialState, action) => {
-  return state;
-}
+  switch (action) {
+    case "GET_WHOLE_STATE":
+      return { ...state };
+    default:
+      return state;
+  }
+};
 
 export default combineReducers({
-  rootReducer, authReducers,
+  rootReducer,
+  authReducers,
   routing: routerReducer,
-
 });

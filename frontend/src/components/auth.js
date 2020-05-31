@@ -1,42 +1,99 @@
-import React, { useState } from 'react';
-import { addUser } from '../actions/actions';
+import React, { useState } from "react";
+import { addUser, setToken } from "../actions/actions";
 import { connect } from "react-redux";
+import { usePosition } from "use-position";
+import http from "../services/http";
+import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
 
-const Auth = ({ state, setAuthData }) => {
-  const [userName, changeUserName] = useState('');
-  const [userEmail, changeUserEmail] = useState('');
-  const [userPass, changeUserPass] = useState('');
-  const userData = {
-    userName: userName,
+const Auth = ({ setToken }) => {
+  const [userLoginName, getUserLoginName] = useState("");
+  const [userLoginPass, getUserLoginPass] = useState("");
+  const [userRegisterName, getUserRegisterName] = useState("");
+  const [userRegisterPass, getUserRegisterPass] = useState("");
+  const [userEmail, getUserEmail] = useState("");
+
+  const { latitude, longitude, timestamp, accuracy, error } = usePosition(true);
+
+  const userRegisterData = {
+    userRegisterName: userRegisterName,
     userEmail: userEmail,
-    userPass: userPass
-  }
-  console.log(localStorage.getItem("token"))
+    userRegisterPass: userRegisterPass,
+  };
+  const userLoginData = {
+    userLoginName: userLoginName,
+    userLoginPass: userLoginPass,
+  };
+
+  const login = (userData, setToken) => {
+    http.login(userData, setToken);
+  };
+  const register = (userData) => {
+    http.register(userData, setToken);
+  };
   return (
     <div>
       <div>
         login
-      <input type='text' placeholder='login'></input>
-        <input type='text' placeholder='userPass' ></input>
-        <button>submit</button>
+        <input
+          type="text"
+          placeholder="login"
+          value={userLoginName}
+          onChange={(e) => getUserLoginName(e.target.value)}
+        ></input>
+        <input
+          type="text"
+          placeholder="userPass"
+          value={userLoginPass}
+          onChange={(e) => getUserLoginPass(e.target.value)}
+        ></input>
+        <button
+          onClick={() => {
+            login(userLoginData, setToken);
+          }}
+        >
+          submit
+        </button>
       </div>
       <div>
         registration
-      <input type='text' placeholder='userName' value={userName} onChange={e => changeUserName(e.target.value)}></input>
-        <input type='text' placeholder='userEmail' value={userEmail} onChange={e => changeUserEmail(e.target.value)}></input>
-        <input type='text' placeholder='userPass' value={userPass} onChange={e => changeUserPass(e.target.value)}></input>
-        <button onClick={() => setAuthData(userData)}>submit</button>
+        <input
+          type="text"
+          placeholder="userName"
+          value={userRegisterName}
+          onChange={(e) => getUserRegisterName(e.target.value)}
+        ></input>
+        <input
+          type="text"
+          placeholder="userEmail"
+          value={userEmail}
+          onChange={(e) => getUserEmail(e.target.value)}
+        ></input>
+        <input
+          type="text"
+          placeholder="userPass"
+          value={userRegisterPass}
+          onChange={(e) => getUserRegisterPass(e.target.value)}
+        ></input>
+        <button onClick={() => register(userRegisterData)}>submit</button>
       </div>
+      <code>
+        latitude: {latitude}
+        <br />
+        longitude: {longitude}
+        <br />
+        timestamp: {timestamp}
+        <br />
+        accuracy: {accuracy && `${accuracy}m`}
+        <br />
+        error: {error}
+      </code>
     </div>
-  )
-}
+  );
+};
 
-// const mapStateToProps = state => ({
-//   userData: { userName: '', userEmail: '', userPass: '' }, state
-// });
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setAuthData: (userData) => dispatch(addUser(userData))
-  }
-}
+    setToken: (token) => dispatch(setToken(token)),
+  };
+};
 export default connect(null, mapDispatchToProps)(Auth);
