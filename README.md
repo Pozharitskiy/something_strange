@@ -1,7 +1,5 @@
 # something_strange
-# Hello, Ilya, or, what? Are you russian????
-# ЗДАРОВА БИЧ, ЭТО НЕ НАШЯ ВАЙНА
-## TO START THIS SHIT:
+## TO START THIS:
 ## cd server
 ## nodemon index
 ### ---------new terminal-------------
