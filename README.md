@@ -1,7 +1,8 @@
 # something_strange
 ## TO START THIS:
 ## cd server
-## nodemon index
+## npm install
+## npm start
 ### ---------new terminal-------------
 ## cd frontend
 ## npm i
