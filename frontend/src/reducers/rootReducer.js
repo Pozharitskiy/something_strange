@@ -1,6 +1,8 @@
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
 
+import { GET_STATE } from "../actions/actions";
+
 import authReducers from "./authReducers";
 
 const initialState = {
@@ -14,7 +16,7 @@ const initialState = {
 };
 const rootReducer = (state = initialState, action) => {
   switch (action) {
-    case "GET_WHOLE_STATE":
+    case GET_STATE:
       return { ...state };
     default:
       return state;

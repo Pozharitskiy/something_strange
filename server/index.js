@@ -13,9 +13,9 @@ app.use(express.json());
 //create user
 app.post("/users", async (req, res) => {
   try {
-    const userName = req.body.userRegisterName;
+    const userName = req.body.userName;
     const email = req.body.userEmail;
-    const pass = req.body.userRegisterPass;
+    const pass = req.body.userPass;
     const token = createToken();
     const createdUser = await pool.query(
       "SELECT * FROM users WHERE userName = $1",

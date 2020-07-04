@@ -3,7 +3,6 @@ const http = {
 
   //register
   register: async (userData, setToken) => {
-    console.log(userData);
     try {
       const response = await fetch("http://localhost:5000/users", {
         method: "POST",
@@ -19,9 +18,10 @@ const http = {
 
   //login
   login: async (userData, setToken) => {
+    console.log(userData);
     try {
       const response = await fetch(
-        `http://localhost:5000/users/${userData.userLoginName}/${userData.userLoginPass}`,
+        `http://localhost:5000/users/${userData.userName}/${userData.userPass}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
