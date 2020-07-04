@@ -2,12 +2,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getState } from "./actions/actions";
+import { getState } from "../../actions/actions";
 
 import "./App.css";
 
 const App = ({ state, getState }) => {
-  console.log("app state", state);
   // getState();
   return <div className="App">app</div>;
 };

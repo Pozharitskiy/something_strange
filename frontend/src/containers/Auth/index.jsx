@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 // import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
-import http from "../services/http";
+import http from "../../services/http";
 import {
   setToken,
   getUserName,
   getUserEmail,
   getUserPass,
-} from "../actions/actions";
-import AuthContainer from "../containers/auth";
+} from "../../actions/actions";
+import AuthContainer from "../../components/Auth";
 
 const Auth = ({
   userEmail,
@@ -22,14 +22,11 @@ const Auth = ({
   const login = (userData, setToken) => {
     http.login(userData, setToken);
   };
+
   const register = (userData) => {
     http.register(userData, setToken);
   };
-  const userData = {
-    userName: userName,
-    userEmail: userEmail,
-    userPass: userPass,
-  };
+
   return (
     <AuthContainer
       getUserEmail={getUserEmail}
@@ -46,7 +43,6 @@ const Auth = ({
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     userName: state.authReducers.userName,
     userPass: state.authReducers.userPass,

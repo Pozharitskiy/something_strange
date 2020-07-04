@@ -1,0 +1,18 @@
+.auth {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.auth-login,
+.auth-registration {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.auth-login > *,
+.auth-registration > * {
+  margin-left: 20px;
+}

@@ -3,6 +3,8 @@ import React from "react";
 
 // const { latitude, longitude, timestamp, accuracy, error } = usePosition(true);
 
+import "./Auth.css";
+
 const AuthContainer = ({
   getUserEmail,
   getUserName,
@@ -20,9 +22,9 @@ const AuthContainer = ({
     userPass: userPass,
   };
   return (
-    <div>
-      <div>
-        login
+    <div className="auth">
+      <div className="auth-login">
+        Login
         <input
           type="text"
           placeholder="login"
@@ -40,11 +42,11 @@ const AuthContainer = ({
             login(userData, setToken);
           }}
         >
-          submit
+          Submit
         </button>
       </div>
-      <div>
-        registration
+      <div className="auth-registration">
+        Registration
         <input
           type="text"
           placeholder="userName"
@@ -65,7 +67,7 @@ const AuthContainer = ({
           value={userPass}
           onChange={(e) => getUserPass(e.target.value)}
         ></input>
-        <button onClick={() => register(userData)}>submit</button>
+        <button onClick={() => register(userData)}>Submit</button>
       </div>
       {/* <code>
       latitude: {latitude}
