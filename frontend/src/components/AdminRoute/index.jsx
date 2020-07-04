@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 
-import { setToken } from "../actions/actions";
+import { setToken } from "../../actions/actions";
 
 import App from "../App";
-import Auth from "./auth";
+import Auth from "../../containers/Auth";
 
 const AdminRoute = ({
-  component: Component,
   token,
   setToken,
   state,

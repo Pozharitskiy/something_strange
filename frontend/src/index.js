@@ -5,8 +5,7 @@ import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import thunk from "redux-thunk";
 
-import App from "./App";
-import AdminRoute from "./components/AdminRoute";
+import AdminRoute from "./components/AdminRoute/";
 import rootReducer from "./reducers/rootReducer";
 import * as serviceWorker from "./serviceWorker";
 
@@ -17,7 +16,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
-      <AdminRoute exact component={App}></AdminRoute>
+      <AdminRoute exact></AdminRoute>
     </HashRouter>
   </Provider>,
   document.getElementById("root")
