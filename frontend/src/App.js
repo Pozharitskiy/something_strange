@@ -7,19 +7,18 @@ import { getState } from "./actions/actions";
 import "./App.css";
 
 const App = ({ state, getState }) => {
-  console.log("app state", state);
   // getState();
   return <div className="App">app</div>;
 };
 
-const mapStateToProps = (state) => ({
-  state: state,
+const mapStateToProps = state => ({
+  state: state
 });
 //state
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   //functions
-  getState: () => dispatch(getState()),
+  getState: () => dispatch(getState())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

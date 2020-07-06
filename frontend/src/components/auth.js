@@ -6,7 +6,7 @@ import {
   setToken,
   getUserName,
   getUserEmail,
-  getUserPass,
+  getUserPass
 } from "../actions/actions";
 import AuthContainer from "../containers/auth";
 
@@ -17,18 +17,18 @@ const Auth = ({
   setToken,
   getUserEmail,
   getUserName,
-  getUserPass,
+  getUserPass
 }) => {
   const login = (userData, setToken) => {
     http.login(userData, setToken);
   };
-  const register = (userData) => {
+  const register = userData => {
     http.register(userData, setToken);
   };
   const userData = {
     userName: userName,
     userEmail: userEmail,
-    userPass: userPass,
+    userPass: userPass
   };
   return (
     <AuthContainer
@@ -45,23 +45,22 @@ const Auth = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
+const mapStateToProps = state => {
   return {
     userName: state.authReducers.userName,
     userPass: state.authReducers.userPass,
     userName: state.authReducers.userName,
     userPass: state.authReducers.userPass,
-    userEmail: state.authReducers.userEmail,
+    userEmail: state.authReducers.userEmail
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setToken: (token) => dispatch(setToken(token)),
-    getUserName: (userName) => dispatch(getUserName(userName)),
-    getUserPass: (userPass) => dispatch(getUserPass(userPass)),
-    getUserEmail: (userEmail) => dispatch(getUserEmail(userEmail)),
+    setToken: token => dispatch(setToken(token)),
+    getUserName: userName => dispatch(getUserName(userName)),
+    getUserPass: userPass => dispatch(getUserPass(userPass)),
+    getUserEmail: userEmail => dispatch(getUserEmail(userEmail))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

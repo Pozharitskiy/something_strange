@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 // import { usePosition } from "use-position";
 
 // const { latitude, longitude, timestamp, accuracy, error } = usePosition(true);
@@ -12,12 +13,12 @@ const AuthContainer = ({
   userPass,
   login,
   register,
-  setToken,
+  setToken
 }) => {
   const userData = {
     userName: userName,
     userEmail: userEmail,
-    userPass: userPass,
+    userPass: userPass
   };
   return (
     <div>
@@ -26,14 +27,14 @@ const AuthContainer = ({
         <input
           type="text"
           placeholder="login"
-          value={userName}
-          onChange={(e) => getUserName(e.target.value)}
+          value={userName || ""}
+          onChange={e => getUserName(e.target.value)}
         ></input>
         <input
           type="text"
           placeholder="userPass"
-          value={userPass}
-          onChange={(e) => getUserPass(e.target.value)}
+          value={userPass || ""}
+          onChange={e => getUserPass(e.target.value)}
         ></input>
         <button
           onClick={() => {
@@ -48,22 +49,22 @@ const AuthContainer = ({
         <input
           type="text"
           placeholder="userName"
-          value={userName}
-          onChange={(e) => {
+          value={userName || ""}
+          onChange={e => {
             getUserName(e.target.value);
           }}
         ></input>
         <input
           type="text"
           placeholder="userEmail"
-          value={userEmail}
-          onChange={(e) => getUserEmail(e.target.value)}
+          value={userEmail || ""}
+          onChange={e => getUserEmail(e.target.value)}
         ></input>
         <input
           type="text"
           placeholder="userPass"
-          value={userPass}
-          onChange={(e) => getUserPass(e.target.value)}
+          value={userPass || ""}
+          onChange={e => getUserPass(e.target.value)}
         ></input>
         <button onClick={() => register(userData)}>submit</button>
       </div>
