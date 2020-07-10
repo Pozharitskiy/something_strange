@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import ModalWindow from "../ModalWindow";
 // import { usePosition } from "use-position";
 
 // const { latitude, longitude, timestamp, accuracy, error } = usePosition(true);
@@ -46,30 +47,38 @@ const AuthContainer = ({
           Submit
         </button>
       </div>
-      <div className="auth-registration">
-        Registration
-        <input
-          type="text"
-          placeholder="userName"
-          value={userName || ""}
-          onChange={e => {
-            getUserName(e.target.value);
-          }}
-        ></input>
-        <input
-          type="text"
-          placeholder="userEmail"
-          value={userEmail || ""}
-          onChange={e => getUserEmail(e.target.value)}
-        ></input>
-        <input
-          type="text"
-          placeholder="userPass"
-          value={userPass || ""}
-          onChange={e => getUserPass(e.target.value)}
-        ></input>
-        <button onClick={() => register(userData)}>Submit</button>
-      </div>
+      <ModalWindow
+        modalType={"registration"}
+        actions={[getUserEmail, getUserName, getUserPass]}
+        actionLabels={["Your e-mail", "Your name", "Your password"]}
+        confirm={register}
+        extraData={userData}
+      >
+        {/* <div className="auth-registration">
+          Registration
+          <input
+            type="text"
+            placeholder="userName"
+            value={userName || ""}
+            onChange={e => {
+              getUserName(e.target.value);
+            }}
+          ></input>
+          <input
+            type="text"
+            placeholder="userEmail"
+            value={userEmail || ""}
+            onChange={e => getUserEmail(e.target.value)}
+          ></input>
+          <input
+            type="text"
+            placeholder="userPass"
+            value={userPass || ""}
+            onChange={e => getUserPass(e.target.value)}
+          ></input>
+          <button onClick={() => register(userData)}>Submit</button>
+        </div> */}
+      </ModalWindow>
       {/* <code>
       latitude: {latitude}
       <br />

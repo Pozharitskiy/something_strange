@@ -22,22 +22,11 @@ const Auth = ({
   const login = (userData, setToken) => {
     http.login(userData, setToken);
   };
-<<<<<<< HEAD:frontend/src/components/auth.js
-  const register = userData => {
-    http.register(userData, setToken);
-  };
-  const userData = {
-    userName: userName,
-    userEmail: userEmail,
-    userPass: userPass
-  };
-=======
 
   const register = (userData) => {
     http.register(userData, setToken);
   };
 
->>>>>>> aee3a3ec0a45ac64bc4d86e2a94d6a1df115678d:frontend/src/containers/Auth/index.jsx
   return (
     <AuthContainer
       getUserEmail={getUserEmail}
@@ -53,11 +42,7 @@ const Auth = ({
   );
 };
 
-<<<<<<< HEAD:frontend/src/components/auth.js
-const mapStateToProps = state => {
-=======
 const mapStateToProps = (state) => {
->>>>>>> aee3a3ec0a45ac64bc4d86e2a94d6a1df115678d:frontend/src/containers/Auth/index.jsx
   return {
     userName: state.authReducers.userName,
     userPass: state.authReducers.userPass,
