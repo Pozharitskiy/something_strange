@@ -20,7 +20,7 @@ const http = {
   login: async (userData, setToken) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/users/${userData.userName}/${userData.userPass}`,
+        `http://localhost:5000/users/login/${userData.userName}/${userData.userPass}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -32,6 +32,23 @@ const http = {
       console.log(err);
     }
   },
+
+  forgetPass: async (userData, setToken) => {
+    console.log(userData)
+    try {
+      const response = await fetch(
+        `http://localhost:5000/users/forgetPass/${userData.userName}/${userData.userSecretWord}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+        .then((res) => res.json())
+        .then((token) => setToken(token))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 };
 
 export default http;

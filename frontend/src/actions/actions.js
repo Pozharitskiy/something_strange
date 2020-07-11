@@ -12,6 +12,9 @@ export const GET_USER_PASS = "GET_USER_PASS";
 
 export const GET_USER_EMAIL = "GET_USER_EMAIL";
 
+export const GET_USER_SECRET_WORD = "GET_USER_SECRET_WORD";
+
+
 /*
  * action creators
  */
@@ -30,6 +33,10 @@ export const getUserPass = (userPass) => {
 
 export const getUserEmail = (userEmail) => {
   return { type: GET_USER_EMAIL, userEmail };
+};
+
+export const getUserSecretWord = (userSecretWord) => {
+  return { type: GET_USER_SECRET_WORD, userSecretWord };
 };
 
 export const getState = () => {

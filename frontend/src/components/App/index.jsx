@@ -8,7 +8,7 @@ import "./App.css";
 
 const App = ({ state, getState }) => {
   // getState();
-  return <div className="App">app</div>;
+  return <div className="App">Future App</div>;
 };
 
 const mapStateToProps = state => ({

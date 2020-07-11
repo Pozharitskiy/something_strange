@@ -16,6 +16,7 @@ app.post("/users", async (req, res) => {
     const userName = req.body.userName;
     const email = req.body.userEmail;
     const pass = req.body.userPass;
+    const userSecretWord = req.body.userSecretWord;
     const token = createToken();
     const createdUser = await pool.query(
       "SELECT * FROM users WHERE userName = $1",
@@ -23,8 +24,8 @@ app.post("/users", async (req, res) => {
     );
     if (createdUser.rows.length === 0) {
       newUser = await pool.query(
-        "INSERT INTO users (username, email, pass, token) VALUES($1, $2, $3, $4) RETURNING *",
-        [userName, email, pass, token]
+        "INSERT INTO users (username, email, pass, userSecretWord, token) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [userName, email, pass, userSecretWord, token]
       );
       res.json(newUser.rows[0]);
     } else {
@@ -48,13 +49,15 @@ app.get("/users", async (req, res) => {
 
 //get a user's token
 
-app.get("/users/:userName/:userPass", async (req, res) => {
+app.get(`/users/:authType/:userName/:userSecurityParameter`, async (req, res) => {
+  console.log(req.params)
   try {
     const { userName } = req.params;
-    const { userPass } = req.params;
+    const { userSecurityParameter } = req.params;
+    const { authType } = req.params;
     const token = await pool.query(
-      "SELECT token FROM users WHERE userName = $1 AND pass = $2",
-      [userName, userPass]
+      `SELECT token FROM users WHERE userName = $1 AND ${authType === 'login' ? 'pass' : 'userSecretWord'} = $2`,
+      [userName, userSecurityParameter]
     );
     if (token.rows[0].token) {
       res.json(token.rows[0].token);

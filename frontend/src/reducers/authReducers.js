@@ -3,12 +3,14 @@ import {
   GET_USER_NAME,
   GET_USER_PASS,
   GET_USER_EMAIL,
+  GET_USER_SECRET_WORD
 } from "../actions/actions";
 
 const initialState = {
   userName: "",
   userEmail: "",
   userPass: "",
+  userSecretWord: "",
   token: null,
 };
 
@@ -33,7 +35,11 @@ const authReducers = (state = initialState, action) => {
         ...state,
         userEmail: action.userEmail,
       };
-
+    case GET_USER_SECRET_WORD:
+      return {
+        ...state,
+        userSecretWord: action.userSecretWord,
+      }
     default:
       return {};
   }

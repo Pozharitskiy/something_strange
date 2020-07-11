@@ -11,17 +11,21 @@ const AuthContainer = ({
   getUserEmail,
   getUserName,
   getUserPass,
+  getUserSecretWord,
   userName,
   userEmail,
   userPass,
+  userSecretWord,
   login,
   register,
+  forgetPass,
   setToken
 }) => {
   const userData = {
     userName: userName,
     userEmail: userEmail,
-    userPass: userPass
+    userPass: userPass,
+    userSecretWord: userSecretWord
   };
   return (
     <div className="auth">
@@ -49,35 +53,20 @@ const AuthContainer = ({
       </div>
       <ModalWindow
         modalType={"registration"}
-        actions={[getUserEmail, getUserName, getUserPass]}
-        actionLabels={["Your e-mail", "Your name", "Your password"]}
+        actions={[getUserEmail, getUserName, getUserPass, getUserSecretWord]}
+        actionLabels={["Your e-mail", "Your name", "Your password", "Your secret word"]}
         confirm={register}
         extraData={userData}
       >
-        {/* <div className="auth-registration">
-          Registration
-          <input
-            type="text"
-            placeholder="userName"
-            value={userName || ""}
-            onChange={e => {
-              getUserName(e.target.value);
-            }}
-          ></input>
-          <input
-            type="text"
-            placeholder="userEmail"
-            value={userEmail || ""}
-            onChange={e => getUserEmail(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="userPass"
-            value={userPass || ""}
-            onChange={e => getUserPass(e.target.value)}
-          ></input>
-          <button onClick={() => register(userData)}>Submit</button>
-        </div> */}
+      </ModalWindow>
+      <ModalWindow
+        modalType={"forget pass"}
+        actions={[getUserName, getUserSecretWord]}
+        actionLabels={["Your name", "Your secret word"]}
+        confirm={forgetPass}
+        extraData={userData}
+      >
+
       </ModalWindow>
       {/* <code>
       latitude: {latitude}
