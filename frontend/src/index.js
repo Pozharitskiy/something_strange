@@ -9,7 +9,7 @@ import AdminRoute from "./components/AdminRoute/";
 import rootReducer from "./reducers/rootReducer";
 import * as serviceWorker from "./serviceWorker";
 
-import "./index.css";
+import "./index.scss";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

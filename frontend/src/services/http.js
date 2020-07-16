@@ -33,11 +33,11 @@ const http = {
     }
   },
 
-  forgetPass: async (userData, setToken) => {
+  forgotPass: async (userData, setToken) => {
     console.log(userData)
     try {
       const response = await fetch(
-        `http://localhost:5000/users/forgetPass/${userData.userName}/${userData.userSecretWord}`,
+        `http://localhost:5000/users/forgotPass/${userData.userName}/${userData.userSecretWord}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },

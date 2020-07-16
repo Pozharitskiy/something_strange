@@ -1,11 +1,13 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import ModalWindow from "../ModalWindow";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import useStyles from "../../utils/usestyles-materialUI";
 // import { usePosition } from "use-position";
 
 // const { latitude, longitude, timestamp, accuracy, error } = usePosition(true);
 
-import "./Auth.css";
+import "./Auth.scss";
 
 const AuthContainer = ({
   getUserEmail,
@@ -18,7 +20,7 @@ const AuthContainer = ({
   userSecretWord,
   login,
   register,
-  forgetPass,
+  forgotPass,
   setToken
 }) => {
   const userData = {
@@ -27,47 +29,46 @@ const AuthContainer = ({
     userPass: userPass,
     userSecretWord: userSecretWord
   };
+  //material UI
+  const classes = useStyles();
+
+  //material UI ends
   return (
     <div className="auth">
       <div className="auth-login">
-        Login
-        <input
-          type="text"
-          placeholder="login"
-          value={userName || ""}
-          onChange={e => getUserName(e.target.value)}
-        ></input>
-        <input
-          type="text"
-          placeholder="userPass"
-          value={userPass || ""}
-          onChange={e => getUserPass(e.target.value)}
-        ></input>
-        <button
-          onClick={() => {
-            login(userData, setToken);
-          }}
-        >
-          Submit
-        </button>
+        <form className={classes.root} noValidate autoComplete="off" className="login-form">
+          <TextField id="standard-basic login-username" label="username" value={userName || ""}
+            onChange={e => getUserName(e.target.value)} />
+          <TextField id="standard-basic login-password" label="password" value={userPass || ""}
+            onChange={e => getUserPass(e.target.value)} />
+          <Button variant="outlined" color="primary" className="login-btn"
+            onClick={() => {
+              login(userData, setToken);
+            }}
+          >
+            Submit
+        </Button>
+        </form>
       </div>
-      <ModalWindow
-        modalType={"registration"}
-        actions={[getUserEmail, getUserName, getUserPass, getUserSecretWord]}
-        actionLabels={["Your e-mail", "Your name", "Your password", "Your secret word"]}
-        confirm={register}
-        extraData={userData}
-      >
-      </ModalWindow>
-      <ModalWindow
-        modalType={"forget pass"}
-        actions={[getUserName, getUserSecretWord]}
-        actionLabels={["Your name", "Your secret word"]}
-        confirm={forgetPass}
-        extraData={userData}
-      >
+      <div className="auth-help--btns">
+        <ModalWindow
+          modalType={"registration"}
+          actions={[getUserEmail, getUserName, getUserPass, getUserSecretWord]}
+          actionLabels={["Your e-mail", "Your name", "Your password", "Your secret word"]}
+          confirm={register}
+          extraData={userData}
+        >
+        </ModalWindow>
+        <ModalWindow
+          modalType={"forgot pass"}
+          actions={[getUserName, getUserSecretWord]}
+          actionLabels={["Your name", "Your secret word"]}
+          confirm={forgotPass}
+          extraData={userData}
+        >
 
-      </ModalWindow>
+        </ModalWindow>
+      </div>
       {/* <code>
       latitude: {latitude}
       <br />

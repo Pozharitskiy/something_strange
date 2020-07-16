@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { getState } from "../../actions/actions";
 
-import "./App.css";
+import "./App.scss";
 
 const App = ({ state, getState }) => {
   // getState();

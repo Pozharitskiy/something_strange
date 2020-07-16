@@ -30,8 +30,8 @@ const Auth = ({
     http.register(userData, setToken);
   };
 
-  const forgetPass = (userData) => {
-    http.forgetPass(userData, setToken);
+  const forgotPass = (userData) => {
+    http.forgotPass(userData, setToken);
   }
 
   return (
@@ -46,7 +46,7 @@ const Auth = ({
       userSecretWord={userSecretWord}
       login={login}
       register={register}
-      forgetPass={forgetPass}
+      forgotPass={forgotPass}
       setToken={setToken}
     />
   );
