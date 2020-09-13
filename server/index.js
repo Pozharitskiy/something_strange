@@ -59,8 +59,15 @@ app.get(`/users/:authType/:userName/:userSecurityParameter`, async (req, res) =>
       `SELECT token FROM users WHERE userName = $1 AND ${authType === 'login' ? 'pass' : 'userSecretWord'} = $2`,
       [userName, userSecurityParameter]
     );
+    const users = await pool.query(
+      "SELECT * FROM users"
+    )
     if (token.rows[0].token) {
-      res.json(token.rows[0].token);
+      res.json({
+        token: token.rows[0].token,
+        users: users.rows
+      });
+      // res.json(users.rows)
     } else {
       console.log("this user is not exist");
     }
@@ -104,3 +111,6 @@ app.delete("/users/:id", async (req, res) => {
 app.listen(5000, () => {
   console.log("server was started by INSPIRING DEN");
 });
+
+//chat
+

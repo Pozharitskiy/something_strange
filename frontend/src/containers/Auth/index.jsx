@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import http from "../../services/http";
 import {
   setToken,
+  setUsers,
   getUserName,
   getUserEmail,
   getUserPass,
-  getUserSecretWord
+  getUserSecretWord,
 } from "../../actions/actions";
 import AuthContainer from "../../components/Auth";
 
@@ -17,13 +18,14 @@ const Auth = ({
   userPass,
   userSecretWord,
   setToken,
+  setUsers,
   getUserEmail,
   getUserName,
   getUserPass,
   getUserSecretWord
 }) => {
-  const login = (userData, setToken) => {
-    http.login(userData, setToken);
+  const login = (userData, setToken, setUsers) => {
+    http.login(userData, setToken, setUsers);
   };
 
   const register = (userData) => {
@@ -48,6 +50,7 @@ const Auth = ({
       register={register}
       forgotPass={forgotPass}
       setToken={setToken}
+      setUsers={setUsers}
     />
   );
 };
@@ -66,6 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     setToken: token => dispatch(setToken(token)),
+    setUsers: users => dispatch(setUsers(users)),
     getUserName: userName => dispatch(getUserName(userName)),
     getUserPass: userPass => dispatch(getUserPass(userPass)),
     getUserEmail: userEmail => dispatch(getUserEmail(userEmail)),

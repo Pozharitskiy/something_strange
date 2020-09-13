@@ -21,7 +21,8 @@ const AuthContainer = ({
   login,
   register,
   forgotPass,
-  setToken
+  setToken,
+  setUsers
 }) => {
   const userData = {
     userName: userName,
@@ -43,7 +44,7 @@ const AuthContainer = ({
             onChange={e => getUserPass(e.target.value)} />
           <Button variant="outlined" color="primary" className="login-btn"
             onClick={() => {
-              login(userData, setToken);
+              login(userData, setToken, setUsers);
             }}
           >
             Submit

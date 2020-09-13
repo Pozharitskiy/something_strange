@@ -3,7 +3,9 @@ import {
   GET_USER_NAME,
   GET_USER_PASS,
   GET_USER_EMAIL,
-  GET_USER_SECRET_WORD
+  GET_USER_SECRET_WORD,
+  SET_USERS,
+  GET_USERS
 } from "../actions/actions";
 
 const initialState = {
@@ -19,7 +21,10 @@ const authReducers = (state = initialState, action) => {
     case SET_TOKEN:
       localStorage.setItem("token", action.token);
       return { ...state, token: action.token };
-
+    case SET_USERS:
+      return { ...state, users: action.users }
+    case GET_USERS:
+      return { ...state.users }
     case GET_USER_NAME:
       return {
         ...state,

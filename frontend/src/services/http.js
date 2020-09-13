@@ -17,9 +17,9 @@ const http = {
   },
 
   //login
-  login: async (userData, setToken) => {
+  login: async (userData, setToken, setUsers) => {
     try {
-      const response = await fetch(
+      await fetch(
         `http://localhost:5000/users/login/${userData.userName}/${userData.userPass}`,
         {
           method: "GET",
@@ -27,7 +27,10 @@ const http = {
         }
       )
         .then((res) => res.json())
-        .then((token) => setToken(token));
+        .then((data) => {
+          setUsers(data.users)
+          setToken(data.token)
+        });
     } catch (err) {
       console.log(err);
     }
